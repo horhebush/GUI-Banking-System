@@ -107,7 +107,7 @@ public class HomePanel {
         JPanel pinPanel = new JPanel();
         pinPanel.setLayout(new BorderLayout());
 
-        JLabel pinLabel = new JLabel("Enter your 4-digit PIN:");
+        JLabel pinLabel = new JLabel("Enter your PIN:");
         pinPanel.add(pinLabel, BorderLayout.NORTH);
 
         pinField = new JTextField(10);
