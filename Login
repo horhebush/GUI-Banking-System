@@ -1,0 +1,112 @@
+package intermediateBank;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.JSeparator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class BankFrame extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textUsername;
+	private JTextField textPassword;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BankFrame frame = new BankFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public BankFrame() {
+		setTitle("LogIn Panel");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 572, 381);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel txtusername = new JLabel("Username:");
+		txtusername.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtusername.setBounds(106, 92, 90, 32);
+		contentPane.add(txtusername);
+		
+		JLabel txtpassword = new JLabel("Password:");
+		txtpassword.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtpassword.setBounds(106, 158, 90, 32);
+		contentPane.add(txtpassword);
+		
+		textUsername = new JTextField();
+		textUsername.setBounds(228, 100, 194, 20);
+		contentPane.add(textUsername);
+		textUsername.setColumns(10);
+		
+		textPassword = new JTextField();
+		textPassword.setBounds(228, 166, 194, 20);
+		contentPane.add(textPassword);
+		textPassword.setColumns(10);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        String password = textPassword.getText().trim();  
+		        String username = textUsername.getText().trim();  
+		        
+		        if (password.isEmpty() || username.isEmpty()) {
+		            JOptionPane.showMessageDialog(null, "Username and Password cannot be blank");
+		        }
+		        else if (password.equals("bank") && username.equals("federal")) {
+		            JOptionPane.showMessageDialog(null, "Login Success!");
+		        }
+		        else {
+		            JOptionPane.showMessageDialog(null, "Invalid Login Details", "Login Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
+		});
+				
+		btnLogin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
+		btnLogin.setBounds(228, 256, 89, 23);
+		contentPane.add(btnLogin);
+		
+		JLabel lblNewLabel_2 = new JLabel("Don't have an account? Sign-Up");
+		lblNewLabel_2.setBounds(186, 296, 194, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(25, 50, 500, 2);
+		contentPane.add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(25, 232, 500, 2);
+		contentPane.add(separator_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("Login System");
+		lblNewLabel_3.setFont(new Font("Wide Latin", Font.BOLD, 16));
+		lblNewLabel_3.setBounds(186, 25, 211, 14);
+		contentPane.add(lblNewLabel_3);
+	}
+}
