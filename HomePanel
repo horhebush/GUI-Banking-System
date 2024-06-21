@@ -174,17 +174,17 @@ public class HomePanel extends JFrame implements ActionListener {
 
     private void DepositPanel() {
         // for Deposit Panel
-        JOptionPane.showMessageDialog(this, "Deposit Panel");
+       
     }
 
     private void WithdrawalPanel() {
         // for Withdraw panel
-        JOptionPane.showMessageDialog(this, "Withdraw Panel");
+      
     }
 
     private void AccountInfo() {
         // for Account Information Panel
-        JOptionPane.showMessageDialog(this, "Account Information Panel");
+        
     }
 
     // for testing purposes
