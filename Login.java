@@ -1,4 +1,5 @@
-package intermediateBank;
+package bankingGUI;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,9 +13,9 @@ import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
-public class BankFrame extends JFrame {
-	
-	
+
+public class LogIn extends JFrame {
+		
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textUsername;
@@ -26,7 +27,7 @@ public class BankFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BankFrame frame = new BankFrame();
+					LogIn frame = new LogIn();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +38,7 @@ public class BankFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BankFrame() {
+	public LogIn() {
 		setTitle("LogIn Panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1350, 800);
@@ -107,13 +108,16 @@ public class BankFrame extends JFrame {
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textUsername.setText(null);
-				textPassword.setText(null);
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == btnCancel) {
+                	setVisible(false);
+                	new WelcomePage();
+                }
+            }
+        });
+		
 		btnCancel.setBounds(617, 452, 89, 23);
 		contentPane.add(btnCancel);
 	}
 }
-
