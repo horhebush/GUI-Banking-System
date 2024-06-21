@@ -9,6 +9,7 @@ public class musicPlayer {
     private FloatControl volumeControl;
     private float volumeBeforeMute = 0.0f;
 
+    // Plays music from the specified file location
     public void plyMusic(String location) {
         try {
             File musicPath = new File(location);
@@ -17,7 +18,7 @@ public class musicPlayer {
                 mClip = AudioSystem.getClip();
                 mClip.open(audioInput);
                 volumeControl = (FloatControl) mClip.getControl(FloatControl.Type.MASTER_GAIN);
-                mClip.loop(Clip.LOOP_CONTINUOUSLY); // loops endlessly HAHAHA
+                mClip.loop(Clip.LOOP_CONTINUOUSLY); // loops endlessly
                 mClip.start();
             } else {
                 System.out.println("Can't find file");
@@ -27,6 +28,7 @@ public class musicPlayer {
         }
     }
 
+    // Mutes the music
     public void mute() {
         if (mClip != null && volumeControl != null) {
             volumeBeforeMute = volumeControl.getValue();
@@ -34,6 +36,7 @@ public class musicPlayer {
         }
     }
 
+    // Unmutes the music
     public void unmute() {
         if (mClip != null && volumeControl != null) {
             volumeControl.setValue(volumeBeforeMute);
