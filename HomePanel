@@ -32,7 +32,6 @@ public class HomePanel extends JFrame implements ActionListener {
     private double balance;
     private static long AccountNumber = 2024100000;
     private String pin;
-   
 
     public HomePanel(String username, double balance, String accountNumber, String pin) {
         this.username = username;
@@ -121,11 +120,11 @@ public class HomePanel extends JFrame implements ActionListener {
             dispose();
             System.exit(0);
         } else if (e.getSource() == accountInfoButton || e.getSource() == depositButton || e.getSource() == withdrawalButton) {
-            createPinDialog();
+            createPinDialog(e.getSource());
         }
     }
 
-    private void createPinDialog() {
+    private void createPinDialog(Object object) {
         pinDialog = new JDialog(this, "Enter PIN", true);
         pinDialog.setSize(200, 150);
 
@@ -143,14 +142,21 @@ public class HomePanel extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 String enteredPin = pinField.getText();
                 try {
-                	if (validatePin(enteredPin)) {
-                    pinDialog.dispose();
-                    
-                } else {
-                    JOptionPane.showMessageDialog(pinDialog, "Invalid PIN");
+                    if (validatePin(enteredPin)) {
+                        pinDialog.dispose();
+                        if (object == depositButton) {
+                            DepositPanel();
+                        } else if (object == withdrawalButton) {
+                            WithdrawalPanel();
+                        } else if (object == accountInfoButton) {
+                            AccountInfo();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(pinDialog, "Invalid PIN");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(pinDialog, "PIN must be a 4-digit number");
                 }
-            } catch (NumberFormatException ex) {
-            	JOptionPane.showMessageDialog(pinDialog, "PIN must be a 4-digit number"); }
             }
         });
         pinPanel.add(okButton, BorderLayout.SOUTH);
@@ -160,10 +166,29 @@ public class HomePanel extends JFrame implements ActionListener {
     }
 
     private boolean validatePin(String pin) {
+        if (pin.length() != 4) {
+            throw new NumberFormatException();
+        }
         return pin.equals(this.pin);
     }
-    //for testing purposes
+
+    private void DepositPanel() {
+        // for Deposit Panel
+        JOptionPane.showMessageDialog(this, "Deposit Panel");
+    }
+
+    private void WithdrawalPanel() {
+        // for Withdraw panel
+        JOptionPane.showMessageDialog(this, "Withdraw Panel");
+    }
+
+    private void AccountInfo() {
+        // for Account Information Panel
+        JOptionPane.showMessageDialog(this, "Account Information Panel");
+    }
+
+    // for testing purposes
     public static void main(String[] args) {
-        new HomePanel("Jasmine", 500.00, "2024100000", "1234");
+        new HomePanel("Jasmine", 500.00, "2024100000", "1234"); 
     }
 }
