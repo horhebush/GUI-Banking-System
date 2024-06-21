@@ -275,22 +275,26 @@ public class SignUpGUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitButtn) {
             // Get user input
-            String username = userNF.getText().trim();
-            String password = new String(userPF.getPassword());
-            String pin = new String(userPnF.getPassword());
-            String firstName = fNameF.getText().trim();
-            String middleName = mNameF.getText().trim();
-            String lastName = lNameF.getText().trim();
-            String dobDay = (String) dayComboBox.getSelectedItem();
-            String dobMonth = (String) monthComboBox.getSelectedItem();
-            String dobYear = (String) yearComboBox.getSelectedItem();
-            String gender = (String) genderDropdown.getSelectedItem();
-            String address = addressHomeF.getText().trim();
-            String fatherName = fatherNF.getText().trim();
-            String motherName = motherNF.getText().trim();
-            String contactEmail = contactEmailF.getText().trim();
-            String contactNumber = contactNumberF.getText().trim();
-            String initialDeposit = initialDepF.getText().trim();
+        	String username, password, pin, firstName, middleName, lastName,
+        	dobDay, dobMonth, dobYear, gender, address, fatherName, motherName,
+        	contactEmail, contactNumber, initialDeposit;
+        	
+            username = userNF.getText().trim();
+            password = new String(userPF.getPassword());
+            pin = new String(userPnF.getPassword());
+            firstName = fNameF.getText().trim();
+            middleName = mNameF.getText().trim();
+            lastName = lNameF.getText().trim();
+            dobDay = (String) dayComboBox.getSelectedItem();
+            dobMonth = (String) monthComboBox.getSelectedItem();
+            dobYear = (String) yearComboBox.getSelectedItem();
+            gender = (String) genderDropdown.getSelectedItem();
+            address = addressHomeF.getText().trim();
+            fatherName = fatherNF.getText().trim();
+            motherName = motherNF.getText().trim();
+            contactEmail = contactEmailF.getText().trim();
+            contactNumber = contactNumberF.getText().trim();
+            initialDeposit = initialDepF.getText().trim();
 
             // Validate required fields
             if (username.isEmpty() || password.isEmpty() || pin.isEmpty() || firstName.isEmpty() ||
