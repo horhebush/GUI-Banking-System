@@ -93,7 +93,7 @@ public class BankFrame extends JFrame {
 		lblNewLabel_2.setBounds(186, 296, 194, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		JSeparator separator = new JSeparator();
+		JSeparator separator = new JSarator();
 		separator.setBounds(65, 125, 1200, 2);
 		contentPane.add(separator);
 		
@@ -111,4 +111,3 @@ public class BankFrame extends JFrame {
 		contentPane.add(passwordField);
 	}
 }
-
