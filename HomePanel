@@ -147,7 +147,7 @@ public class HomePanel extends JFrame implements ActionListener {
                         if (object == depositButton) {
                             DepositPanel();
                         } else if (object == withdrawalButton) {
-                            WithdrawalPanel();
+                            WithdrawPanel();
                         } else if (object == accountInfoButton) {
                             AccountInfo();
                         }
@@ -177,7 +177,7 @@ public class HomePanel extends JFrame implements ActionListener {
        
     }
 
-    private void WithdrawalPanel() {
+    private void WithdrawPanel() {
         // for Withdraw panel
       
     }
