@@ -1,17 +1,12 @@
 package javaSwing;
 
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.regex.Pattern;
-import javax.swing.*;
+import java.io.*;
 
 public class SignUpGUI implements ActionListener {
 
@@ -21,15 +16,16 @@ public class SignUpGUI implements ActionListener {
     Font montserratFont;
     musicPlayer player; // Reference to the musicPlayer instance passed from GUI.java
     boolean isMuted = false;
+    UserDetailsChecker detailsChecker; // UserDetailsChecker instance for duplicate checking
 
-    // Labels 
-    JLabel userNL, userPL, userPnL, fName, mName, 
-    lName, birthDate, gender, addressHome, fatherN, motherN, 
-    contactEmail, contactNumber, initialDep;
+    // Labels
+    JLabel userNL, userPL, userPnL, fName, mName,
+            lName, birthDate, gender, addressHome, fatherN, motherN,
+            contactEmail, contactNumber, initialDep;
     // Fields
-    JTextField userNF, fNameF, mNameF, lNameF, 
-    addressHomeF, motherNF, fatherNF, contactEmailF, contactNumberF, initialDepF;
-    
+    JTextField userNF, fNameF, mNameF, lNameF,
+            addressHomeF, motherNF, fatherNF, contactEmailF, contactNumberF, initialDepF;
+
     JPasswordField userPF, userPnF;
     JButton submitButtn, cancelButtn, muteButton;
     JComboBox<String> dayComboBox, monthComboBox, yearComboBox, genderDropdown;
@@ -41,6 +37,9 @@ public class SignUpGUI implements ActionListener {
         initializePanel();
         addComponents();
         window.setVisible(true);
+        
+        // Initialize UserDetailsChecker
+        detailsChecker = new UserDetailsChecker();
     }
 
     private void loadFont() {
@@ -76,7 +75,7 @@ public class SignUpGUI implements ActionListener {
         userNL.setFont(montserratFont);
         userNL.setBounds(10, 20, 100, 25);
         panelS.add(userNL);
-        
+
         userNF = new JTextField();
         userNF.setBounds(120, 20, 300, 25);
         userNF.setFont(montserratFont);
@@ -86,7 +85,7 @@ public class SignUpGUI implements ActionListener {
         userPL.setFont(montserratFont);
         userPL.setBounds(10, 50, 100, 25);
         panelS.add(userPL);
-        
+
         userPF = new JPasswordField();
         userPF.setBounds(120, 50, 300, 25);
         userPF.setFont(montserratFont);
@@ -96,7 +95,7 @@ public class SignUpGUI implements ActionListener {
         userPnL.setFont(montserratFont);
         userPnL.setBounds(10, 80, 100, 25);
         panelS.add(userPnL);
-        
+
         userPnF = new JPasswordField();
         userPnF.setBounds(120, 80, 300, 25);
         userPnF.setFont(montserratFont);
@@ -106,7 +105,7 @@ public class SignUpGUI implements ActionListener {
         fName.setFont(montserratFont);
         fName.setBounds(10, 110, 100, 25);
         panelS.add(fName);
-        
+
         fNameF = new JTextField();
         fNameF.setBounds(120, 110, 300, 25);
         fNameF.setFont(montserratFont);
@@ -116,7 +115,7 @@ public class SignUpGUI implements ActionListener {
         mName.setFont(montserratFont);
         mName.setBounds(10, 140, 100, 25);
         panelS.add(mName);
-        
+
         mNameF = new JTextField();
         mNameF.setBounds(120, 140, 300, 25);
         mNameF.setFont(montserratFont);
@@ -126,7 +125,7 @@ public class SignUpGUI implements ActionListener {
         lName.setFont(montserratFont);
         lName.setBounds(10, 170, 100, 25);
         panelS.add(lName);
-        
+
         lNameF = new JTextField();
         lNameF.setBounds(120, 170, 300, 25);
         lNameF.setFont(montserratFont);
@@ -136,17 +135,17 @@ public class SignUpGUI implements ActionListener {
         birthDate.setFont(montserratFont);
         birthDate.setBounds(10, 200, 100, 25);
         panelS.add(birthDate);
-        
+
         dayComboBox = new JComboBox<>(generateDays());
         dayComboBox.setBounds(120, 200, 60, 25);
         dayComboBox.setFont(montserratFont);
         panelS.add(dayComboBox);
-        
+
         monthComboBox = new JComboBox<>(new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"});
         monthComboBox.setBounds(190, 200, 80, 25);
         monthComboBox.setFont(montserratFont);
         panelS.add(monthComboBox);
-        
+
         yearComboBox = new JComboBox<>(generateYears(1920, 2023));
         yearComboBox.setBounds(280, 200, 80, 25);
         yearComboBox.setFont(montserratFont);
@@ -156,7 +155,7 @@ public class SignUpGUI implements ActionListener {
         gender.setFont(montserratFont);
         gender.setBounds(10, 230, 100, 25);
         panelS.add(gender);
-        
+
         genderDropdown = new JComboBox<>(new String[]{"Male", "Female", "Other"});
         genderDropdown.setBounds(120, 230, 100, 25);
         genderDropdown.setFont(montserratFont);
@@ -166,7 +165,7 @@ public class SignUpGUI implements ActionListener {
         addressHome.setFont(montserratFont);
         addressHome.setBounds(450, 20, 100, 25);
         panelS.add(addressHome);
-        
+
         addressHomeF = new JTextField();
         addressHomeF.setBounds(560, 20, 300, 25);
         addressHomeF.setFont(montserratFont);
@@ -176,7 +175,7 @@ public class SignUpGUI implements ActionListener {
         motherN.setFont(montserratFont);
         motherN.setBounds(450, 50, 100, 25);
         panelS.add(motherN);
-        
+
         motherNF = new JTextField();
         motherNF.setBounds(560, 50, 300, 25);
         motherNF.setFont(montserratFont);
@@ -186,7 +185,7 @@ public class SignUpGUI implements ActionListener {
         fatherN.setFont(montserratFont);
         fatherN.setBounds(450, 80, 100, 25);
         panelS.add(fatherN);
-        
+
         fatherNF = new JTextField();
         fatherNF.setBounds(560, 80, 300, 25);
         fatherNF.setFont(montserratFont);
@@ -196,7 +195,7 @@ public class SignUpGUI implements ActionListener {
         contactNumber.setFont(montserratFont);
         contactNumber.setBounds(450, 110, 100, 25);
         panelS.add(contactNumber);
-        
+
         contactNumberF = new JTextField();
         contactNumberF.setBounds(560, 110, 300, 25);
         contactNumberF.setFont(montserratFont);
@@ -206,7 +205,7 @@ public class SignUpGUI implements ActionListener {
         contactEmail.setFont(montserratFont);
         contactEmail.setBounds(450, 140, 100, 25);
         panelS.add(contactEmail);
-        
+
         contactEmailF = new JTextField();
         contactEmailF.setBounds(560, 140, 300, 25);
         contactEmailF.setFont(montserratFont);
@@ -216,7 +215,7 @@ public class SignUpGUI implements ActionListener {
         initialDep.setFont(montserratFont);
         initialDep.setBounds(450, 170, 100, 25);
         panelS.add(initialDep);
-        
+
         initialDepF = new JTextField();
         initialDepF.setBounds(560, 170, 300, 25);
         initialDepF.setFont(montserratFont);
@@ -239,6 +238,8 @@ public class SignUpGUI implements ActionListener {
         muteButton.setBounds(780, 290, 80, 25);
         muteButton.setFont(montserratFont);
         panelS.add(muteButton);
+
+        // Anonymous ActionListener; only for the task of muting, basically
         muteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 isMuted = !isMuted;
@@ -270,44 +271,54 @@ public class SignUpGUI implements ActionListener {
         return years;
     }
 
-    private int getNextFileNumber() {
-        int fileNumber = 1;
-        while (new File("user_details" + fileNumber + ".txt").exists()) {
-            fileNumber++;
-        }
-        return fileNumber;
-    }
-
-    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitButtn) {
-            String username = userNF.getText();
+            // Get user input
+            String username = userNF.getText().trim();
             String password = new String(userPF.getPassword());
             String pin = new String(userPnF.getPassword());
-            String firstName = fNameF.getText();
-            String middleName = mNameF.getText();
-            String lastName = lNameF.getText();
+            String firstName = fNameF.getText().trim();
+            String middleName = mNameF.getText().trim();
+            String lastName = lNameF.getText().trim();
             String dobDay = (String) dayComboBox.getSelectedItem();
             String dobMonth = (String) monthComboBox.getSelectedItem();
             String dobYear = (String) yearComboBox.getSelectedItem();
             String gender = (String) genderDropdown.getSelectedItem();
-            String address = addressHomeF.getText();
-            String fatherName = fatherNF.getText();
-            String motherName = motherNF.getText();
-            String contactEmail = contactEmailF.getText();
-            String contactNumber = contactNumberF.getText();
-            String initialDeposit = initialDepF.getText();
+            String address = addressHomeF.getText().trim();
+            String fatherName = fatherNF.getText().trim();
+            String motherName = motherNF.getText().trim();
+            String contactEmail = contactEmailF.getText().trim();
+            String contactNumber = contactNumberF.getText().trim();
+            String initialDeposit = initialDepF.getText().trim();
 
-            // Validate the PIN as a 6-digit number
-            if (!Pattern.matches("\\d{6}", pin)) {
-                JOptionPane.showMessageDialog(null, "PIN must be a 6-digit number");
+            // Validate required fields
+            if (username.isEmpty() || password.isEmpty() || pin.isEmpty() || firstName.isEmpty() ||
+                    lastName.isEmpty() || dobDay == null || dobMonth == null || dobYear == null ||
+                    gender == null || address.isEmpty() || fatherName.isEmpty() || motherName.isEmpty() ||
+                    contactEmail.isEmpty() || contactNumber.isEmpty() || initialDeposit.isEmpty()) {
+
+                JOptionPane.showMessageDialog(null, "Please fill out all required fields", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
+            // Validate the PIN as a 6-digit number
+            if (!pin.matches("\\d{6}")) {
+                JOptionPane.showMessageDialog(null, "PIN must be a 6-digit number", "Invalid PIN", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Check for duplicate username
+            if (detailsChecker.isDuplicate(username)) {
+                JOptionPane.showMessageDialog(null, "Username already exists", "Duplicate Username", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Continue with saving data if all validations pass
             int fileNumber = getNextFileNumber();
             String fileName = "user_details" + fileNumber + ".txt";
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(fileName)))) {
+                // Write user data to file
                 writer.write(username + "\n");
                 writer.write(password + "\n");
                 writer.write(pin + "\n");
@@ -317,17 +328,18 @@ public class SignUpGUI implements ActionListener {
                 writer.write(dobDay + "/" + dobMonth + "/" + dobYear + "\n");
                 writer.write(gender + "\n");
                 writer.write(address + "\n");
-                writer.write(fatherName + "\n");
                 writer.write(motherName + "\n");
-                writer.write(contactEmail + "\n");
+                writer.write(fatherName + "\n");
                 writer.write(contactNumber + "\n");
+                writer.write(contactEmail + "\n");
                 writer.write(initialDeposit + "\n");
 
-                JOptionPane.showMessageDialog(null, "Data submitted successfully!");
+                JOptionPane.showMessageDialog(null, "Data submitted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
                 // Clear all fields after successful submission
                 clearFields();
             } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error saving data", "Error", JOptionPane.ERROR_MESSAGE);
                 ex.printStackTrace();
             }
         }
@@ -335,6 +347,14 @@ public class SignUpGUI implements ActionListener {
         if (e.getSource() == cancelButtn) {
             window.dispose();
         }
+    }
+
+    private int getNextFileNumber() {
+        int fileNumber = 1;
+        while (new File("user_details" + fileNumber + ".txt").exists()) {
+            fileNumber++;
+        }
+        return fileNumber;
     }
 
     private void clearFields() {
