@@ -46,48 +46,50 @@ public class AccountInformation {
 
     private void initializeUI() {
         frame = new JFrame("Account Information Panel");
-        frame.setSize(900, 550);
+        frame.setSize(1350, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
         panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(50, 0, 800, 600); 
+        panel.setBounds(50, 0, 1250, 750); 
         frame.add(panel);
 
-        int labelWidth = 120;
-        int fieldWidth = 400;
+        int labelWidth = 200;
+        int fieldWidth = 600;
+        Font labelFont = new Font("Arial", Font.BOLD, 14);
+        Font fieldFont = new Font("Arial", Font.PLAIN, 14);
 
-        userNameLabel = createLabel("User Name:", 50, 30, labelWidth, 25);
-        passWordLabel = createLabel("Password:", 50, 60, labelWidth, 25);
-        pinCodeLabel = createLabel("Pin:", 50, 90, labelWidth, 25);
-        firstNameLabel = createLabel("First Name:", 50, 120, labelWidth, 25);
-        middleNameLabel = createLabel("Middle Name:", 50, 150, labelWidth, 25);
-        lastNameLabel = createLabel("Last Name:", 50, 180, labelWidth, 25);
-        birthDateLabel = createLabel("Birth Date:", 50, 210, labelWidth, 25);
-        genderLabel = createLabel("Gender:", 50, 240, labelWidth, 25);
-        addressLabel = createLabel("Address:", 50, 270, labelWidth, 25);
-        fatherNameLabel = createLabel("Father's Name:", 50, 300, labelWidth, 25);
-        motherNameLabel = createLabel("Mother's Name:", 50, 330, labelWidth, 25);
-        contactEmailLabel = createLabel("Contact Email:", 50, 360, labelWidth, 25);
-        contactNumberLabel = createLabel("Contact Number:", 50, 390, labelWidth, 25);
-        initialDepositLabel = createLabel("Initial Deposit:", 50, 420, labelWidth, 25);
+        userNameLabel = createLabel("User Name:", 50, 30, labelWidth, 30, labelFont);
+        passWordLabel = createLabel("Password:", 50, 70, labelWidth, 30, labelFont);
+        pinCodeLabel = createLabel("Pin:", 50, 110, labelWidth, 30, labelFont);
+        firstNameLabel = createLabel("First Name:", 50, 150, labelWidth, 30, labelFont);
+        middleNameLabel = createLabel("Middle Name:", 50, 190, labelWidth, 30, labelFont);
+        lastNameLabel = createLabel("Last Name:", 50, 230, labelWidth, 30, labelFont);
+        birthDateLabel = createLabel("Birth Date:", 50, 270, labelWidth, 30, labelFont);
+        genderLabel = createLabel("Gender:", 50, 310, labelWidth, 30, labelFont);
+        addressLabel = createLabel("Address:", 50, 350, labelWidth, 30, labelFont);
+        fatherNameLabel = createLabel("Father's Name:", 50, 390, labelWidth, 30, labelFont);
+        motherNameLabel = createLabel("Mother's Name:", 50, 430, labelWidth, 30, labelFont);
+        contactEmailLabel = createLabel("Contact Email:", 50, 470, labelWidth, 30, labelFont);
+        contactNumberLabel = createLabel("Contact Number:", 50, 510, labelWidth, 30, labelFont);
+        initialDepositLabel = createLabel("Initial Deposit:", 50, 550, labelWidth, 30, labelFont);
 
-        userNameField = createTextField(200, 30, fieldWidth, 25);
-        passWordField = createTextField(200, 60, fieldWidth, 25);
-        pinCodeField = createTextField(200, 90, fieldWidth, 25);
-        firstNameField = createTextField(200, 120, fieldWidth, 25);
-        middleNameField = createTextField(200, 150, fieldWidth, 25);
-        lastNameField = createTextField(200, 180, fieldWidth, 25);
-        birthDateField = createTextField(200, 210, fieldWidth, 25);
-        genderField = createTextField(200, 240, fieldWidth, 25);
-        addressField = createTextField(200, 270, fieldWidth, 25);
-        fatherNameField = createTextField(200, 300, fieldWidth, 25);
-        motherNameField = createTextField(200, 330, fieldWidth, 25);
-        contactEmailField = createTextField(200, 360, fieldWidth, 25);
-        contactNumberField = createTextField(200, 390, fieldWidth, 25);
-        initialDepositField = createTextField(200, 420, fieldWidth, 25);
+        userNameField = createTextField(260, 30, fieldWidth, 30, fieldFont);
+        passWordField = createTextField(260, 70, fieldWidth, 30, fieldFont);
+        pinCodeField = createTextField(260, 110, fieldWidth, 30, fieldFont);
+        firstNameField = createTextField(260, 150, fieldWidth, 30, fieldFont);
+        middleNameField = createTextField(260, 190, fieldWidth, 30, fieldFont);
+        lastNameField = createTextField(260, 230, fieldWidth, 30, fieldFont);
+        birthDateField = createTextField(260, 270, fieldWidth, 30, fieldFont);
+        genderField = createTextField(260, 310, fieldWidth, 30, fieldFont);
+        addressField = createTextField(260, 350, fieldWidth, 30, fieldFont);
+        fatherNameField = createTextField(260, 390, fieldWidth, 30, fieldFont);
+        motherNameField = createTextField(260, 430, fieldWidth, 30, fieldFont);
+        contactEmailField = createTextField(260, 470, fieldWidth, 30, fieldFont);
+        contactNumberField = createTextField(260, 510, fieldWidth, 30, fieldFont);
+        initialDepositField = createTextField(260, 550, fieldWidth, 30, fieldFont);
 
         panel.add(userNameLabel);
         panel.add(passWordLabel);
@@ -122,15 +124,20 @@ public class AccountInformation {
         frame.setVisible(true);
     }
 
-    private JLabel createLabel(String text, int x, int y, int width, int height) {
+    private JLabel createLabel(String text, int x, int y, int width, int height, Font font) {
         JLabel label = new JLabel(text);
         label.setBounds(x, y, width, height);
+        label.setFont(font);
         return label;
     }
 
-    private JTextField createTextField(int x, int y, int width, int height) {
+    private JTextField createTextField(int x, int y, int width, int height, Font font) {
         JTextField textField = new JTextField();
         textField.setBounds(x, y, width, height);
+        textField.setFont(font);
+        textField.setEditable(false); 
+        textField.setFocusable(false); 
+        textField.setBackground(Color.WHITE); 
         return textField;
     }
 
