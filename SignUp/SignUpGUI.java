@@ -42,6 +42,9 @@ public class SignUpGUI implements ActionListener {
         
         // Initialize UserDetailsChecker
         detailsChecker = new UserDetailsChecker();
+        
+        // Center the window on the screen
+        window.setLocationRelativeTo(null);
     }
 
     private void loadFont() {
@@ -75,166 +78,167 @@ public class SignUpGUI implements ActionListener {
         // Labels and Fields
         userNL = new JLabel("User Name:");
         userNL.setFont(montserratFont);
-        userNL.setBounds(10, 20, 100, 25);
+        userNL.setBounds(10, 20, 150, 30);
         panelS.add(userNL);
 
         userNF = new JTextField();
-        userNF.setBounds(120, 20, 300, 25);
+        userNF.setBounds(170, 20, 450, 30);
         userNF.setFont(montserratFont);
         panelS.add(userNF);
 
         userPL = new JLabel("Password:");
         userPL.setFont(montserratFont);
-        userPL.setBounds(10, 50, 100, 25);
+        userPL.setBounds(10, 60, 150, 30);
         panelS.add(userPL);
 
         userPF = new JPasswordField();
-        userPF.setBounds(120, 50, 300, 25);
+        userPF.setBounds(170, 60, 450, 30);
         userPF.setFont(montserratFont);
         panelS.add(userPF);
 
         userPnL = new JLabel("Pin:");
         userPnL.setFont(montserratFont);
-        userPnL.setBounds(10, 80, 100, 25);
+        userPnL.setBounds(10, 100, 150, 30);
         panelS.add(userPnL);
 
         userPnF = new JPasswordField();
-        userPnF.setBounds(120, 80, 300, 25);
+        userPnF.setBounds(170, 100, 450, 30);
         userPnF.setFont(montserratFont);
         panelS.add(userPnF);
 
         fName = new JLabel("First Name:");
         fName.setFont(montserratFont);
-        fName.setBounds(10, 110, 100, 25);
+        fName.setBounds(10, 140, 150, 30);
         panelS.add(fName);
 
         fNameF = new JTextField();
-        fNameF.setBounds(120, 110, 300, 25);
+        fNameF.setBounds(170, 140, 450, 30);
         fNameF.setFont(montserratFont);
         panelS.add(fNameF);
 
         mName = new JLabel("Middle Name:");
         mName.setFont(montserratFont);
-        mName.setBounds(10, 140, 100, 25);
+        mName.setBounds(10, 180, 150, 30);
         panelS.add(mName);
 
         mNameF = new JTextField();
-        mNameF.setBounds(120, 140, 300, 25);
+        mNameF.setBounds(170, 180, 450, 30);
         mNameF.setFont(montserratFont);
         panelS.add(mNameF);
 
         lName = new JLabel("Last Name:");
         lName.setFont(montserratFont);
-        lName.setBounds(10, 170, 100, 25);
+        lName.setBounds(10, 220, 150, 30);
         panelS.add(lName);
 
         lNameF = new JTextField();
-        lNameF.setBounds(120, 170, 300, 25);
+        lNameF.setBounds(170, 220, 450, 30);
         lNameF.setFont(montserratFont);
         panelS.add(lNameF);
 
         birthDate = new JLabel("Date of Birth:");
         birthDate.setFont(montserratFont);
-        birthDate.setBounds(10, 200, 100, 25);
+        birthDate.setBounds(10, 260, 150, 30);
         panelS.add(birthDate);
 
         dayComboBox = new JComboBox<>(generateDays());
-        dayComboBox.setBounds(120, 200, 60, 25);
+        dayComboBox.setBounds(170, 260, 60, 30);
         dayComboBox.setFont(montserratFont);
         panelS.add(dayComboBox);
 
-        monthComboBox = new JComboBox<>(new String[]{"Jan", "Feb", "Mar", "Apr", "May", 
-        "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"});
-        monthComboBox.setBounds(190, 200, 80, 25);
+        monthComboBox = new JComboBox<>(new String[]{"Jan", "Feb", "Mar", "Apr", 
+        "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"});
+        monthComboBox.setBounds(240, 260, 80, 30);
         monthComboBox.setFont(montserratFont);
         panelS.add(monthComboBox);
 
         yearComboBox = new JComboBox<>(generateYears(1920, 2023));
-        yearComboBox.setBounds(280, 200, 80, 25);
+        yearComboBox.setBounds(330, 260, 80, 30);
         yearComboBox.setFont(montserratFont);
         panelS.add(yearComboBox);
 
         gender = new JLabel("Gender:");
         gender.setFont(montserratFont);
-        gender.setBounds(10, 230, 100, 25);
+        gender.setBounds(10, 300, 150, 30);
         panelS.add(gender);
 
         genderDropdown = new JComboBox<>(new String[]{"Male", "Female", "Other"});
-        genderDropdown.setBounds(120, 230, 100, 25);
+        genderDropdown.setBounds(170, 300, 100, 30);
         genderDropdown.setFont(montserratFont);
         panelS.add(genderDropdown);
 
         addressHome = new JLabel("Address:");
         addressHome.setFont(montserratFont);
-        addressHome.setBounds(450, 20, 100, 25);
+        addressHome.setBounds(650, 20, 150, 30);
         panelS.add(addressHome);
 
         addressHomeF = new JTextField();
-        addressHomeF.setBounds(560, 20, 300, 25);
+        addressHomeF.setBounds(810, 20, 450, 30);
         addressHomeF.setFont(montserratFont);
         panelS.add(addressHomeF);
 
         motherN = new JLabel("Mother's Name:");
         motherN.setFont(montserratFont);
-        motherN.setBounds(450, 50, 100, 25);
+        motherN.setBounds(650, 60, 150, 30);
         panelS.add(motherN);
 
         motherNF = new JTextField();
-        motherNF.setBounds(560, 50, 300, 25);
+        motherNF.setBounds(810, 60, 450, 30);
         motherNF.setFont(montserratFont);
         panelS.add(motherNF);
 
         fatherN = new JLabel("Father's Name:");
         fatherN.setFont(montserratFont);
-        fatherN.setBounds(450, 80, 100, 25);
+        fatherN.setBounds(650, 100, 150, 30);
         panelS.add(fatherN);
 
         fatherNF = new JTextField();
-        fatherNF.setBounds(560, 80, 300, 25);
+        fatherNF.setBounds(810, 100, 450, 30);
         fatherNF.setFont(montserratFont);
         panelS.add(fatherNF);
 
         contactNumber = new JLabel("Contact Number:");
         contactNumber.setFont(montserratFont);
-        contactNumber.setBounds(450, 110, 100, 25);
+        contactNumber.setBounds(650, 140, 150, 30);
         panelS.add(contactNumber);
 
         contactNumberF = new JTextField();
-        contactNumberF.setBounds(560, 110, 300, 25);
+        contactNumberF.setBounds(810, 140, 450, 30);
         contactNumberF.setFont(montserratFont);
         panelS.add(contactNumberF);
 
         contactEmail = new JLabel("Contact Email:");
         contactEmail.setFont(montserratFont);
-        contactEmail.setBounds(450, 140, 100, 25);
+        contactEmail.setBounds(650, 180, 150, 30);
         panelS.add(contactEmail);
 
         contactEmailF = new JTextField();
-        contactEmailF.setBounds(560, 140, 300, 25);
+        contactEmailF.setBounds(810, 180, 450, 30);
         contactEmailF.setFont(montserratFont);
         panelS.add(contactEmailF);
 
         initialDep = new JLabel("Initial Deposit:");
         initialDep.setFont(montserratFont);
-        initialDep.setBounds(450, 170, 100, 25);
+        initialDep.setBounds(650, 220, 150, 30);
         panelS.add(initialDep);
 
         initialDepF = new JTextField();
-        initialDepF.setBounds(560, 170, 300, 25);
+        initialDepF.setBounds(810, 220, 450, 30);
         initialDepF.setFont(montserratFont);
         panelS.add(initialDepF);
 
         submitButtn = new JButton("Submit");
-        submitButtn.setBounds(1180, 700, 150, 30);
+        submitButtn.setBounds(1500, 700, 150, 30);
         submitButtn.setFont(montserratFont);
         panelS.add(submitButtn);
         submitButtn.addActionListener(this);
+        panelS.add(submitButtn);
 
         cancelButtn = new JButton("Cancel");
-        cancelButtn.setBounds(1010, 700, 150, 30);
+        cancelButtn.setBounds(1010, 780, 150, 30);
         cancelButtn.setFont(montserratFont);
-        panelS.add(cancelButtn);
         cancelButtn.addActionListener(this);
+        panelS.add(cancelButtn);
 
         // Mute Button
         muteButton = new JButton("Mute");
@@ -242,7 +246,7 @@ public class SignUpGUI implements ActionListener {
         muteButton.setFont(montserratFont);
         panelS.add(muteButton);
 
-        // Anonymous ActionListener; only for the task of muting, basically
+        // Anonymous ActionListener for the mute button
         muteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 isMuted = !isMuted;
@@ -320,9 +324,9 @@ public class SignUpGUI implements ActionListener {
                     detailsChecker.isDuplicateMiddleName(middleName) ||
                     detailsChecker.isDuplicateLastName(lastName)) {
 
-                    JOptionPane.showMessageDialog(null, "There is an account with this information already", "Duplicate Information", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
+                JOptionPane.showMessageDialog(null, "There is an account with this information already", "Duplicate Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
             // Continue with saving data if all validations pass
             int fileNumber = getNextFileNumber();
