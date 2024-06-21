@@ -1,10 +1,23 @@
-package FederalBank;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+package GUIBank;
 
-public class HomePanel {
-    private JFrame frame;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class HomePanel extends JFrame implements ActionListener {
     private JPanel homePanel;
     private JLabel balanceLabel;
     private JLabel accountNumberLabel;
@@ -14,18 +27,25 @@ public class HomePanel {
     private JButton logoutButton;
     private JDialog pinDialog;
     private JTextField pinField;
-    private String username = "Jasmine Nofre";
-    private String accountNumber = "2024100000";
-    private double balance = 500.00;
 
-    public HomePanel() {
-        createGUI();  
+    private String username;
+    private double balance;
+    private static long AccountNumber = 2024100000;
+    private String pin;
+   
+
+    public HomePanel(String username, double balance, String accountNumber, String pin) {
+        this.username = username;
+        this.balance = balance;
+        AccountNumber = Long.parseLong(accountNumber);
+        this.pin = pin;
+        GUI();
     }
 
-    private void createGUI() {
-        frame = new JFrame("Federal Reserve Bank of the World");
-        frame.setSize(1350, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private void GUI() {
+        setTitle("Federal Reserve Bank of the World");
+        setSize(1350, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         homePanel = new JPanel();
         homePanel.setLayout(new BorderLayout());
@@ -34,7 +54,7 @@ public class HomePanel {
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         logoutButton = new JButton("Log out");
-        logoutButton.addActionListener(new LogoutListener());
+        logoutButton.addActionListener(this);
         topPanel.add(logoutButton);
         homePanel.add(topPanel, BorderLayout.NORTH);
 
@@ -54,14 +74,16 @@ public class HomePanel {
         balanceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerPanel.add(Box.createVerticalStrut(20)); // vertical space
         centerPanel.add(balanceLabel);
-        
-        JLabel balanceValueLabel = new JLabel("₱ " + String.format("%.2f", balance));
-        balanceValueLabel.setFont(new Font("Serif", Font.BOLD, 50));
-        balanceValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        centerPanel.add(Box.createVerticalStrut(20)); // vertical space
-        centerPanel.add(balanceValueLabel);
 
-        accountNumberLabel = new JLabel("Account Number: " + accountNumber);
+        JLabel balanceLabel = new JLabel("₱ " + String.format("%.2f", balance));
+        balanceLabel.setFont(new Font("Serif", Font.BOLD, 50));
+        balanceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        centerPanel.add(Box.createVerticalStrut(20)); // vertical space
+        centerPanel.add(balanceLabel);
+
+        long accountNumber = AccountNumber;
+        AccountNumber++;
+        accountNumberLabel = new JLabel("Account Number: " + AccountNumber);
         accountNumberLabel.setFont(new Font("Serif", Font.BOLD, 20));
         accountNumberLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerPanel.add(Box.createVerticalStrut(20)); // vertical space
@@ -72,15 +94,15 @@ public class HomePanel {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 50));
 
         accountInfoButton = new JButton("Account Information");
-        accountInfoButton.addActionListener(new AccountInfoListener());
+        accountInfoButton.addActionListener(this);
         buttonPanel.add(accountInfoButton);
 
         depositButton = new JButton("Deposit");
-        depositButton.addActionListener(new DepositListener());
+        depositButton.addActionListener(this);
         buttonPanel.add(depositButton);
 
         withdrawalButton = new JButton("Withdraw");
-        withdrawalButton.addActionListener(new WithdrawalListener());
+        withdrawalButton.addActionListener(this);
         buttonPanel.add(withdrawalButton);
 
         centerPanel.add(Box.createVerticalStrut(50)); // vertical space
@@ -88,33 +110,46 @@ public class HomePanel {
 
         homePanel.add(centerPanel, BorderLayout.CENTER);
 
-        frame.add(homePanel);
-        frame.setVisible(true);
-        frame.setResizable(false);
+        add(homePanel);
+        setVisible(true);
+        setResizable(false);
     }
 
-    private class LogoutListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            frame.dispose();
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == logoutButton) {
+            dispose();
             System.exit(0);
+        } else if (e.getSource() == accountInfoButton || e.getSource() == depositButton || e.getSource() == withdrawalButton) {
+            createPinDialog();
         }
     }
 
     private void createPinDialog() {
-        pinDialog = new JDialog(frame, "Enter PIN", true);
+        pinDialog = new JDialog(this, "Enter PIN", true);
         pinDialog.setSize(200, 150);
 
         JPanel pinPanel = new JPanel();
         pinPanel.setLayout(new BorderLayout());
 
-        JLabel pinLabel = new JLabel("Enter your PIN:");
+        JLabel pinLabel = new JLabel("Enter your 4-digit PIN:");
         pinPanel.add(pinLabel, BorderLayout.NORTH);
 
         pinField = new JTextField(10);
         pinPanel.add(pinField, BorderLayout.CENTER);
 
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(new PinListener());
+        okButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String enteredPin = pinField.getText();
+                if (validatePin(enteredPin)) {
+                    pinDialog.dispose();
+                    // Perform respective actions based on the original button click
+                } else {
+                    JOptionPane.showMessageDialog(pinDialog, "Invalid PIN");
+                }
+            }
+        });
         pinPanel.add(okButton, BorderLayout.SOUTH);
 
         pinDialog.add(pinPanel);
@@ -122,46 +157,10 @@ public class HomePanel {
     }
 
     private boolean validatePin(String pin) {
-        // PIN validation here
-        return pin.equals("1234"); //should be change accord to user
-    }
-
-    private class AccountInfoListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            createPinDialog();
-        }
-    }
-
-    private class DepositListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            createPinDialog();
-        }
-    }
-
-    private class WithdrawalListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            createPinDialog();
-        }
-    }
-
-    private class PinListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            String pin = pinField.getText();
-            if (validatePin(pin)) {
-                pinDialog.dispose();
-            } else {
-                JOptionPane.showMessageDialog(pinDialog, "Invalid PIN");
-            }
-        }
+        return pin.equals(this.pin);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new HomePanel();
-            }
-        });
+        new HomePanel("Jasmine", 500.00, "2024100000", "1234");
     }
 }
-
-//EDI TAPOS NA!!! :>>
