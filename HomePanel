@@ -161,6 +161,6 @@ public class HomePanel extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new HomePanel("Jasmine", 500.00, "2024100000", "1234");
+        new HomePanel("Jasmine", 500.00, "2024100000", "1234");  //testing purposes
     }
 }
