@@ -95,6 +95,7 @@ public class withdrawPanel extends JFrame implements ActionListener {
 				
 			} catch (NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Please enter a valid number", "Error", JOptionPane.ERROR_MESSAGE);
+				textField.setText("");
 			}
 		} else if (e.getSource() == exitButton) {
 			// return to home page (idk pa pano babalik cuz d pa naka compile)
@@ -109,5 +110,3 @@ public class withdrawPanel extends JFrame implements ActionListener {
 
 	
 	
-
-
