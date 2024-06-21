@@ -62,7 +62,7 @@ public class SignUpGUI implements ActionListener {
         window.setTitle("SignUp Window");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setSize(900, 360);
+        window.setSize(1350, 800);
     }
 
     private void initializePanel() {
