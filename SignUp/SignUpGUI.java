@@ -359,9 +359,18 @@ public class SignUpGUI implements ActionListener {
             }
         }
 
-        if (e.getSource() == cancelButtn) {
-            window.dispose();
-        }
+        cancelButtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == cancelButtn) {
+                    window.dispose(); // Close the current window
+
+                    // Create and display the WelcomePage again
+                    WelcomePage welcomePage = new WelcomePage();
+                    welcomePage.setVisible(true);
+                }
+            }
+        });
     }
 
     private int getNextFileNumber() {
