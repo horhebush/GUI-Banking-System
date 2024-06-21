@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
+// This class provides the graphical user interface for user sign-up.
 public class SignUpGUI implements ActionListener {
 
     ImageIcon logo;
@@ -361,6 +362,7 @@ public class SignUpGUI implements ActionListener {
         return fileNumber;
     }
 
+    // Clears all input fields after successful data submission.
     private void clearFields() {
         userNF.setText("");
         userPF.setText("");
