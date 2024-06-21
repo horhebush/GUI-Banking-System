@@ -142,12 +142,15 @@ public class HomePanel extends JFrame implements ActionListener {
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String enteredPin = pinField.getText();
-                if (validatePin(enteredPin)) {
+                try {
+                	if (validatePin(enteredPin)) {
                     pinDialog.dispose();
-                    // Perform respective actions based on the original button click
+                    
                 } else {
                     JOptionPane.showMessageDialog(pinDialog, "Invalid PIN");
                 }
+            } catch (NumberFormatException ex) {
+            	JOptionPane.showMessageDialog(pinDialog, "PIN must be a 4-digit number"); }
             }
         });
         pinPanel.add(okButton, BorderLayout.SOUTH);
@@ -159,8 +162,8 @@ public class HomePanel extends JFrame implements ActionListener {
     private boolean validatePin(String pin) {
         return pin.equals(this.pin);
     }
-//for testing purposes
+    //for testing purposes
     public static void main(String[] args) {
-        new HomePanel("Jasmine", 500.00, "2024100000", "1234");  //testing purposes
+        new HomePanel("Jasmine", 500.00, "2024100000", "1234");
     }
 }
