@@ -87,6 +87,7 @@ public class depositPanel extends JFrame implements ActionListener{
 				balanceLabel.setText("₱ " + String.format("%.2f", balance)); // Update the balanceLabel
 			} catch (NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Please enter a valid number", "Error", JOptionPane.ERROR_MESSAGE);
+				textField.setText("");
 			}
 		} else if (e.getSource() == exitButton) {
 			// return to home page (idk pa pano babalik cuz d pa naka compile)
