@@ -19,6 +19,7 @@ public class SignUpGUI implements ActionListener {
     boolean isMuted = false;
     UserDetailsChecker detailsChecker; // UserDetailsChecker instance for duplicate checking
 
+    // Labels
     JLabel userNL, userPL, userPnL, fName, mName,
     lName, birthDate, gender, addressHome, fatherN, motherN,
     contactEmail, contactNumber, initialDep;
