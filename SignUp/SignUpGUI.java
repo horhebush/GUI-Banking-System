@@ -143,7 +143,8 @@ public class SignUpGUI implements ActionListener {
         dayComboBox.setFont(montserratFont);
         panelS.add(dayComboBox);
 
-        monthComboBox = new JComboBox<>(new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"});
+        monthComboBox = new JComboBox<>(new String[]{"Jan", "Feb", "Mar", "Apr", "May", 
+        "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"});
         monthComboBox.setBounds(190, 200, 80, 25);
         monthComboBox.setFont(montserratFont);
         panelS.add(monthComboBox);
@@ -224,20 +225,20 @@ public class SignUpGUI implements ActionListener {
         panelS.add(initialDepF);
 
         submitButtn = new JButton("Submit");
-        submitButtn.setBounds(560, 200, 80, 25);
+        submitButtn.setBounds(1180, 700, 150, 30);
         submitButtn.setFont(montserratFont);
         panelS.add(submitButtn);
         submitButtn.addActionListener(this);
 
         cancelButtn = new JButton("Cancel");
-        cancelButtn.setBounds(680, 200, 80, 25);
+        cancelButtn.setBounds(1010, 700, 150, 30);
         cancelButtn.setFont(montserratFont);
         panelS.add(cancelButtn);
         cancelButtn.addActionListener(this);
 
         // Mute Button
         muteButton = new JButton("Mute");
-        muteButton.setBounds(780, 290, 80, 25);
+        muteButton.setBounds(10, 700, 100, 30);
         muteButton.setFont(montserratFont);
         panelS.add(muteButton);
 
