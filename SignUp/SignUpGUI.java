@@ -228,14 +228,14 @@ public class SignUpGUI implements ActionListener {
         panelS.add(initialDepF);
 
         submitButtn = new JButton("Submit");
-        submitButtn.setBounds(1500, 700, 150, 30);
+        submitButtn.setBounds(900, 700, 150, 30);
         submitButtn.setFont(montserratFont);
         panelS.add(submitButtn);
         submitButtn.addActionListener(this);
         panelS.add(submitButtn);
 
         cancelButtn = new JButton("Cancel");
-        cancelButtn.setBounds(1010, 780, 150, 30);
+        cancelButtn.setBounds(1100, 700, 150, 30);
         cancelButtn.setFont(montserratFont);
         cancelButtn.addActionListener(this);
         panelS.add(cancelButtn);
