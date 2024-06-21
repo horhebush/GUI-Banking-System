@@ -19,7 +19,6 @@ public class BankFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textUsername;
 	private JTextField textPassword;
-	private JPasswordField passwordField;
 	/**
 	 * Launch the application.
 	 */
@@ -49,21 +48,21 @@ public class BankFrame extends JFrame {
 		
 		JLabel txtusername = new JLabel("Username:");
 		txtusername.setFont(new Font("Tahoma", Font.BOLD, 14));
-		txtusername.setBounds(106, 219, 90, 32);
+		txtusername.setBounds(545, 219, 90, 32);
 		contentPane.add(txtusername);
 		
 		JLabel txtpassword = new JLabel("Password:");
 		txtpassword.setFont(new Font("Tahoma", Font.BOLD, 14));
-		txtpassword.setBounds(106, 391, 90, 32);
+		txtpassword.setBounds(545, 289, 90, 32);
 		contentPane.add(txtpassword);
 		
 		textUsername = new JTextField();
-		textUsername.setBounds(206, 227, 194, 20);
+		textUsername.setBounds(645, 227, 194, 20);
 		contentPane.add(textUsername);
 		textUsername.setColumns(10);
 		
 		textPassword = new JTextField();
-		textPassword.setBounds(206, 399, 194, 20);
+		textPassword.setBounds(645, 297, 194, 20);
 		contentPane.add(textPassword);
 		textPassword.setColumns(10);
 		
@@ -85,29 +84,36 @@ public class BankFrame extends JFrame {
 		    }
 		});
 				
-		btnLogin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
-		btnLogin.setBounds(671, 616, 89, 23);
+		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnLogin.setBounds(750, 451, 89, 23);
 		contentPane.add(btnLogin);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(186, 296, 194, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		JSeparator separator = new JSarator();
+		JSeparator separator = new JSeparator();
 		separator.setBounds(65, 125, 1200, 2);
 		contentPane.add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(65, 552, 1200, 2);
+		separator_1.setBounds(65, 421, 1200, 2);
 		contentPane.add(separator_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("Login System");
-		lblNewLabel_3.setFont(new Font("Arial Black", Font.BOLD, 24));
-		lblNewLabel_3.setBounds(628, 48, 211, 32);
+		lblNewLabel_3.setFont(new Font("Arial Black", Font.BOLD, 27));
+		lblNewLabel_3.setBounds(587, 55, 211, 32);
 		contentPane.add(lblNewLabel_3);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(206, 399, 194, 20);
-		contentPane.add(passwordField);
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textUsername.setText(null);
+				textPassword.setText(null);
+			}
+		});
+		btnCancel.setBounds(617, 452, 89, 23);
+		contentPane.add(btnCancel);
 	}
 }
+
