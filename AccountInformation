@@ -1,0 +1,197 @@
+package BankingSystem;
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class AccountInformation {
+	private JFrame frame;
+    private JPanel panel;
+
+    private JLabel userNameLabel;
+    private JLabel passWordLabel;
+    private JLabel pinCodeLabel;
+    private JLabel firstNameLabel;
+    private JLabel middleNameLabel;
+    private JLabel lastNameLabel;
+    private JLabel birthDateLabel;
+    private JLabel genderLabel;
+    private JLabel addressLabel;
+    private JLabel fatherNameLabel;
+    private JLabel motherNameLabel;
+    private JLabel contactEmailLabel;
+    private JLabel contactNumberLabel;
+    private JLabel initialDepositLabel;
+
+    private JTextField userNameField;
+    private JTextField passWordField;
+    private JTextField pinCodeField;
+    private JTextField firstNameField;
+    private JTextField middleNameField;
+    private JTextField lastNameField;
+    private JTextField birthDateField;
+    private JTextField genderField;
+    private JTextField addressField;
+    private JTextField fatherNameField;
+    private JTextField motherNameField;
+    private JTextField contactEmailField;
+    private JTextField contactNumberField;
+    private JTextField initialDepositField;
+
+    public AccountInformation() {
+        initializeUI();
+        loadUserInfo();
+    }
+
+    private void initializeUI() {
+        frame = new JFrame("Account Information Panel");
+        frame.setSize(900, 550);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
+
+        panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBounds(50, 0, 800, 600); 
+        frame.add(panel);
+
+        int labelWidth = 120;
+        int fieldWidth = 400;
+
+        userNameLabel = createLabel("User Name:", 50, 30, labelWidth, 25);
+        passWordLabel = createLabel("Password:", 50, 60, labelWidth, 25);
+        pinCodeLabel = createLabel("Pin:", 50, 90, labelWidth, 25);
+        firstNameLabel = createLabel("First Name:", 50, 120, labelWidth, 25);
+        middleNameLabel = createLabel("Middle Name:", 50, 150, labelWidth, 25);
+        lastNameLabel = createLabel("Last Name:", 50, 180, labelWidth, 25);
+        birthDateLabel = createLabel("Birth Date:", 50, 210, labelWidth, 25);
+        genderLabel = createLabel("Gender:", 50, 240, labelWidth, 25);
+        addressLabel = createLabel("Address:", 50, 270, labelWidth, 25);
+        fatherNameLabel = createLabel("Father's Name:", 50, 300, labelWidth, 25);
+        motherNameLabel = createLabel("Mother's Name:", 50, 330, labelWidth, 25);
+        contactEmailLabel = createLabel("Contact Email:", 50, 360, labelWidth, 25);
+        contactNumberLabel = createLabel("Contact Number:", 50, 390, labelWidth, 25);
+        initialDepositLabel = createLabel("Initial Deposit:", 50, 420, labelWidth, 25);
+
+        userNameField = createTextField(200, 30, fieldWidth, 25);
+        passWordField = createTextField(200, 60, fieldWidth, 25);
+        pinCodeField = createTextField(200, 90, fieldWidth, 25);
+        firstNameField = createTextField(200, 120, fieldWidth, 25);
+        middleNameField = createTextField(200, 150, fieldWidth, 25);
+        lastNameField = createTextField(200, 180, fieldWidth, 25);
+        birthDateField = createTextField(200, 210, fieldWidth, 25);
+        genderField = createTextField(200, 240, fieldWidth, 25);
+        addressField = createTextField(200, 270, fieldWidth, 25);
+        fatherNameField = createTextField(200, 300, fieldWidth, 25);
+        motherNameField = createTextField(200, 330, fieldWidth, 25);
+        contactEmailField = createTextField(200, 360, fieldWidth, 25);
+        contactNumberField = createTextField(200, 390, fieldWidth, 25);
+        initialDepositField = createTextField(200, 420, fieldWidth, 25);
+
+        panel.add(userNameLabel);
+        panel.add(passWordLabel);
+        panel.add(pinCodeLabel);
+        panel.add(firstNameLabel);
+        panel.add(middleNameLabel);
+        panel.add(lastNameLabel);
+        panel.add(birthDateLabel);
+        panel.add(genderLabel);
+        panel.add(addressLabel);
+        panel.add(fatherNameLabel);
+        panel.add(motherNameLabel);
+        panel.add(contactEmailLabel);
+        panel.add(contactNumberLabel);
+        panel.add(initialDepositLabel);
+
+        panel.add(userNameField);
+        panel.add(passWordField);
+        panel.add(pinCodeField);
+        panel.add(firstNameField);
+        panel.add(middleNameField);
+        panel.add(lastNameField);
+        panel.add(birthDateField);
+        panel.add(genderField);
+        panel.add(addressField);
+        panel.add(fatherNameField);
+        panel.add(motherNameField);
+        panel.add(contactEmailField);
+        panel.add(contactNumberField);
+        panel.add(initialDepositField);
+
+        frame.setVisible(true);
+    }
+
+    private JLabel createLabel(String text, int x, int y, int width, int height) {
+        JLabel label = new JLabel(text);
+        label.setBounds(x, y, width, height);
+        return label;
+    }
+
+    private JTextField createTextField(int x, int y, int width, int height) {
+        JTextField textField = new JTextField();
+        textField.setBounds(x, y, width, height);
+        return textField;
+    }
+
+    private void loadUserInfo() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("user_details4.txt"))) {
+            String line;
+            int lineNumber = 0;
+            while ((line = reader.readLine()) != null) {
+                switch (lineNumber) {
+                    case 0:
+                        userNameField.setText(line);
+                        break;
+                    case 1:
+                        passWordField.setText(line);
+                        break;
+                    case 2:
+                        pinCodeField.setText(line);
+                        break;
+                    case 3:
+                        firstNameField.setText(line);
+                        break;
+                    case 4:
+                        middleNameField.setText(line);
+                        break;
+                    case 5:
+                        lastNameField.setText(line);
+                        break;
+                    case 6:
+                        birthDateField.setText(line);
+                        break;
+                    case 7:
+                        genderField.setText(line);
+                        break;
+                    case 8:
+                        addressField.setText(line);
+                        break;
+                    case 9:
+                        fatherNameField.setText(line);
+                        break;
+                    case 10:
+                        motherNameField.setText(line);
+                        break;
+                    case 11:
+                        contactEmailField.setText(line);
+                        break;
+                    case 12:
+                        contactNumberField.setText(line);
+                        break;
+                    case 13:
+                        initialDepositField.setText(line);
+                        break;
+                }
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new AccountInformation());
+    }
+}
+        
