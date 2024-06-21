@@ -91,6 +91,11 @@ public class AccountInformation {
         contactNumberField = createTextField(260, 510, fieldWidth, 30, fieldFont);
         initialDepositField = createTextField(260, 550, fieldWidth, 30, fieldFont);
 
+	JButton exitButton = new JButton("Exit");
+        exitButton.setBounds(1150, 700, 100, 30);
+        exitButton.addActionListener(e -> frame.dispose());
+        panel.add(exitButton);
+	
         panel.add(userNameLabel);
         panel.add(passWordLabel);
         panel.add(pinCodeLabel);
