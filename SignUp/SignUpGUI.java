@@ -307,11 +307,15 @@ public class SignUpGUI implements ActionListener {
                 return;
             }
 
-            // Check for duplicate username
-            if (detailsChecker.isDuplicate(username)) {
-                JOptionPane.showMessageDialog(null, "Username already exists", "Duplicate Username", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+            // Check for duplicates
+            if (detailsChecker.isDuplicate(username) ||
+                    detailsChecker.isDuplicateFirstName(firstName) ||
+                    detailsChecker.isDuplicateMiddleName(middleName) ||
+                    detailsChecker.isDuplicateLastName(lastName)) {
+
+                    JOptionPane.showMessageDialog(null, "There is an account with this information already", "Duplicate Information", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
             // Continue with saving data if all validations pass
             int fileNumber = getNextFileNumber();
