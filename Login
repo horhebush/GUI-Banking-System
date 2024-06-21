@@ -43,7 +43,7 @@ public class BankFrame extends JFrame {
 	public BankFrame() {
 		setTitle("LogIn Panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1350, 800);
+		setBounds(100, 100, 572, 381);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -110,3 +110,5 @@ public class BankFrame extends JFrame {
 		contentPane.add(lblNewLabel_3);
 	}
 }
+
+
