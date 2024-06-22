@@ -1,21 +1,9 @@
-package GUIBank;
+package bankingGUI;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class HomePanel extends JFrame implements ActionListener {
     private JPanel homePanel;
@@ -29,15 +17,21 @@ public class HomePanel extends JFrame implements ActionListener {
     private JTextField pinField;
 
     private String username;
-    private double balance;
+    private static double balance;
     private static long AccountNumber = 2024100000;
     private String pin;
+    private double initialDeposit;
+    private AccountInfo accountInfo; // Instance of AccountInfo
 
-    public HomePanel(String username, double balance, String accountNumber, String pin) {
+    public HomePanel(String username, double balance, String accountNumber, String pin, AccountInfo accountInfo) {
         this.username = username;
         this.balance = balance;
-        AccountNumber = Long.parseLong(accountNumber);
+        if (accountNumber != null && !accountNumber.isEmpty()) {
+            AccountNumber = Long.parseLong(accountNumber);
+        }
         this.pin = pin;
+        this.accountInfo = accountInfo;
+        this.initialDeposit = accountInfo.getInitialDeposit(); // Fetch initial deposit from AccountInfo
         GUI();
     }
 
@@ -74,11 +68,11 @@ public class HomePanel extends JFrame implements ActionListener {
         centerPanel.add(Box.createVerticalStrut(20)); // vertical space
         centerPanel.add(balanceLabel);
 
-        JLabel balanceLabel = new JLabel("₱ " + String.format("%.2f", balance));
-        balanceLabel.setFont(new Font("Serif", Font.BOLD, 50));
-        balanceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel balanceValueLabel = new JLabel("₱ " + String.format("%.2f", balance + initialDeposit)); // Update balance computation as needed
+        balanceValueLabel.setFont(new Font("Serif", Font.BOLD, 50));
+        balanceValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerPanel.add(Box.createVerticalStrut(20)); // vertical space
-        centerPanel.add(balanceLabel);
+        centerPanel.add(balanceValueLabel);
 
         long accountNumber = AccountNumber;
         AccountNumber++;
@@ -131,7 +125,7 @@ public class HomePanel extends JFrame implements ActionListener {
         JPanel pinPanel = new JPanel();
         pinPanel.setLayout(new BorderLayout());
 
-        JLabel pinLabel = new JLabel("Enter your 4-digit PIN:");
+        JLabel pinLabel = new JLabel("Enter your 6-digit PIN:");
         pinPanel.add(pinLabel, BorderLayout.NORTH);
 
         pinField = new JTextField(10);
@@ -145,17 +139,18 @@ public class HomePanel extends JFrame implements ActionListener {
                     if (validatePin(enteredPin)) {
                         pinDialog.dispose();
                         if (object == depositButton) {
-                            DepositPanel();
+                            new Deposit(initialDeposit, HomePanel.this); // Pass HomePanel instance
                         } else if (object == withdrawalButton) {
-                            WithdrawPanel();
+                            // Implement withdrawal functionality
+                            JOptionPane.showMessageDialog(null, "Withdrawal functionality not implemented.", "Notice", JOptionPane.INFORMATION_MESSAGE);
                         } else if (object == accountInfoButton) {
-                            AccountInfo();
+                            displayAccountInformation();
                         }
                     } else {
                         JOptionPane.showMessageDialog(pinDialog, "Invalid PIN");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(pinDialog, "PIN must be a 4-digit number");
+                    JOptionPane.showMessageDialog(pinDialog, "PIN must be a 6-digit number");
                 }
             }
         });
@@ -166,29 +161,21 @@ public class HomePanel extends JFrame implements ActionListener {
     }
 
     private boolean validatePin(String pin) {
-        if (pin.length() != 4) {
+        if (pin.length() != 6) {
             throw new NumberFormatException();
         }
         return pin.equals(this.pin);
     }
 
-    private void DepositPanel() {
-        // for Deposit Panel
-       
-    }
-
-    private void WithdrawPanel() {
-        // for Withdraw panel
-      
-    }
-
     private void displayAccountInformation() {
-        new AccountInformation ();
-        
+        String accountDetails = accountInfo.getAccountDetails(); // Assuming AccountInfo has a method to fetch account details
+        JOptionPane.showMessageDialog(this, accountDetails, "Account Information", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    // for testing purposes
+    // For testing purposes
     public static void main(String[] args) {
-        new HomePanel("Jasmine", 500.00, "2024100000", "1234"); 
+        // Example usage:
+        AccountInfo accountInfo = new AccountInfo(); // Instantiate AccountInfo
+        new HomePanel("Jasmine", 0, "2024100000", "123456", accountInfo);
     }
 }

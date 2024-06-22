@@ -1,4 +1,4 @@
-package bankingSystemGUI;
+package bankingGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class WelcomePage extends JFrame {
-
+	private MusicPlayer player;
     private Font orbitronFont;
 
     public WelcomePage() {
@@ -31,7 +31,7 @@ public class WelcomePage extends JFrame {
         titlePanel.add(titleLabel);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 30));
-        buttonPanel.setOpaque(false); 
+        buttonPanel.setOpaque(false);
 
         JButton signInButton = createStyledButton("Sign In", 200, 60);
         JButton signUpButton = createStyledButton("Sign Up", 200, 60);
@@ -54,7 +54,7 @@ public class WelcomePage extends JFrame {
 
     private void loadFont() {
         try {
-            File fontFile = new File("Orbitron-Regular.ttf");
+            File fontFile = new File("Orbitron-VariableFont_wght.ttf");
             orbitronFont = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(orbitronFont);
@@ -89,9 +89,12 @@ public class WelcomePage extends JFrame {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (text.equals("Sign In")) {
-                    // ICALL NA LANG
+                    LogIn loginFrame = new LogIn();
+                	setVisible(false);
+                    loginFrame.setVisible(true); // Display the login frame
                 } else if (text.equals("Sign Up")) {
-                    // ICALL NA LANG
+                	setVisible(false);
+                    new SignUp(player);
                 }
             }
         });
