@@ -1,4 +1,4 @@
-package javaSwing;
+package Java;
 
 import javax.swing.*;
 import java.awt.Font;
@@ -15,7 +15,7 @@ public class SignUpGUI implements ActionListener {
     JFrame window;
     JPanel panelS;
     Font montserratFont;
-    musicPlayer player; // Reference to the musicPlayer instance passed from GUI.java
+    MusicPlayer player; // Reference to the musicPlayer instance passed from GUI.java
     boolean isMuted = false;
     UserDetailsChecker detailsChecker; // UserDetailsChecker instance for duplicate checking
 
@@ -32,7 +32,7 @@ public class SignUpGUI implements ActionListener {
     JButton submitButtn, cancelButtn, muteButton;
     JComboBox<String> dayComboBox, monthComboBox, yearComboBox, genderDropdown;
 
-    public SignUpGUI(musicPlayer player) {
+    public SignUpGUI(MusicPlayer player) {
         this.player = player; // Initialize the player instance passed from GUI.java
         loadFont();
         initializeWindow();
@@ -64,7 +64,7 @@ public class SignUpGUI implements ActionListener {
         window.setIconImage(logo.getImage());
         window.setTitle("SignUp Window");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
+        window.setResizable(true);
         window.setSize(1350, 800);
     }
 
@@ -228,21 +228,21 @@ public class SignUpGUI implements ActionListener {
         panelS.add(initialDepF);
 
         submitButtn = new JButton("Submit");
-        submitButtn.setBounds(900, 700, 150, 30);
+        submitButtn.setBounds(900, 600, 150, 30);
         submitButtn.setFont(montserratFont);
         panelS.add(submitButtn);
         submitButtn.addActionListener(this);
         panelS.add(submitButtn);
 
         cancelButtn = new JButton("Cancel");
-        cancelButtn.setBounds(1100, 700, 150, 30);
+        cancelButtn.setBounds(1100, 600, 150, 30);
         cancelButtn.setFont(montserratFont);
         cancelButtn.addActionListener(this);
         panelS.add(cancelButtn);
 
         // Mute Button
         muteButton = new JButton("Mute");
-        muteButton.setBounds(10, 700, 100, 30);
+        muteButton.setBounds(10, 600, 100, 30);
         muteButton.setFont(montserratFont);
         panelS.add(muteButton);
 
@@ -350,9 +350,12 @@ public class SignUpGUI implements ActionListener {
                 writer.write(initialDeposit + "\n");
 
                 JOptionPane.showMessageDialog(null, "Data submitted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                // Clear all fields after successful submission
                 clearFields();
+                window.setVisible(false);
+                JFrame LogIn = new LogIn ();
+                LogIn.setVisible(true);
+                
+               	
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error saving data", "Error", JOptionPane.ERROR_MESSAGE);
                 ex.printStackTrace();
@@ -363,9 +366,7 @@ public class SignUpGUI implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == cancelButtn) {
-                    window.dispose(); // Close the current window
-
-                    // Create and display the WelcomePage again
+                    window.setVisible(false); // Close the current window
                     WelcomePage welcomePage = new WelcomePage();
                     welcomePage.setVisible(true);
                 }
