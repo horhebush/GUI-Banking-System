@@ -18,22 +18,25 @@ public class HomePanel extends JFrame implements ActionListener {
     private JDialog PinDialog;
     private JTextField pinField;
     private double balance;
+    private double updatedBalance;
     private static long AccountNumber = 2024100000;
     private String username, pin;
 
-    public void parameters(String username, double balance, String accountNumber, String pin) {
+	public void parameters(String username, double balance, String accountNumber, String pin) {
+		balance = 1000;
     	this.username = username;
         this.balance = balance;
         if (accountNumber != null && !accountNumber.isEmpty()) {
             AccountNumber = Long.parseLong(accountNumber);
         }
+        pin = "123456";
         this.pin = pin;
         initializeUI();
         loadUserInfo();
     }
 
     public HomePanel() {
-       parameters(pin, balance, pin, "123456");
+       parameters(pin, balance, pin, pin);
     }
     private void initializeUI() {
         setTitle("Federal Reserve Bank of the World");
@@ -168,7 +171,7 @@ public class HomePanel extends JFrame implements ActionListener {
         label.setBounds(525, 150, 250, 50);
         withdrawPanel.add(label);
 
-        withdrawBalanceLabel = new JLabel("₱ " + String.format("%.2f", balance));
+        withdrawBalanceLabel = new JLabel("₱ " + String.format("%.2f", balance)); 
         withdrawBalanceLabel.setFont(new Font("Serif", Font.BOLD, 60));
         withdrawBalanceLabel.setBounds(525, 210, 300, 70);
         withdrawPanel.add(withdrawBalanceLabel);
@@ -320,10 +323,13 @@ public class HomePanel extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please enter a valid amount", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
             balance += depositAmount;
+            JOptionPane.showMessageDialog(null, "Amount Deposited!", "Notice", JOptionPane.INFORMATION_MESSAGE);
             balanceValueLabel.setText("₱ " + String.format("%.2f", balance));
             depositBalanceLabel.setText("₱ " + String.format("%.2f", balance));
             depositTextField.setText("");
+            withdrawBalanceLabel.setText("₱ " + String.format("%.2f", balance));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter a valid amount", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
         }
@@ -336,10 +342,15 @@ public class HomePanel extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please enter a valid amount", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            withdrawBalanceLabel.setText("₱ " + String.format("%.2f", balance));
             balance -= withdrawAmount;
+            JOptionPane.showMessageDialog(null, "Amount Withdrawed!", "Notice", JOptionPane.INFORMATION_MESSAGE);
+            withdrawTextField.setText("");
             balanceValueLabel.setText("₱ " + String.format("%.2f", balance));
             withdrawBalanceLabel.setText("₱ " + String.format("%.2f", balance));
-            withdrawTextField.setText("");
+            depositBalanceLabel.setText("₱ " + String.format("%.2f", balance));
+            
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter a valid amount", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
         }
