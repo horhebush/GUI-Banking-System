@@ -25,7 +25,7 @@ public class HomePanel extends JFrame implements ActionListener {
     private static long AccountNumber = 2024100000;
     private String name, pin; 
     AccountInfo accountInfoInstance = new AccountInfo(); 
-
+     	
 	public void parameters(String name, double balance, String accountNumber, String pin) {
 	
 		intialDept B = accountInfoInstance.new intialDept(); 
@@ -72,7 +72,7 @@ public class HomePanel extends JFrame implements ActionListener {
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel welcomeLabel = new JLabel("Welcome, " + username + "!");
+        JLabel welcomeLabel = new JLabel("Welcome, " + name + "!");
         welcomeLabel.setFont(new Font("Serif", Font.BOLD, 30));
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerPanel.add(Box.createVerticalStrut(100)); // vertical space
