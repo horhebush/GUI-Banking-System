@@ -21,7 +21,7 @@ public class HomePanel extends JFrame implements ActionListener {
     private double balance;
     private double updatedBalance;
     private static long AccountNumber = 2024100000;
-    private String username, pin;
+    private String username, pin; 
 
 	public void parameters(String username, double balance, String accountNumber, String pin) {
 		AccountInfo accountInfoInstance = new AccountInfo(); // Create an instance of AccountInfo
@@ -123,6 +123,7 @@ public class HomePanel extends JFrame implements ActionListener {
         createWithdrawPanel();
         createAccountInfoPanel();
 
+
         setVisible(true);
         setResizable(false);
     }
@@ -214,46 +215,8 @@ public class HomePanel extends JFrame implements ActionListener {
     }
 
     private void createAccountInfoPanel() {
-    	
-    	accountInfoPanel = new JPanel();
-        accountInfoPanel.setLayout(null);
-        accountInfoPanel.setBounds(50, 0, 1250, 750);
-
-        int labelWidth = 200;
-        int fieldWidth = 600;
-        Font labelFont = new Font("Arial", Font.BOLD, 14);
-        Font fieldFont = new Font("Arial", Font.PLAIN, 14);
-
-        String[] labels = {
-                "User Name:", "Password:", "Pin:", "First Name:", "Middle Name:", "Last Name:",
-                "Birth Date:", "Gender:", "Address:", "Father's Name:", "Mother's Name:",
-                "Contact Email:", "Contact Number:", "Initial Deposit:", "Account Number:"
-        };
-
-        accountInfoFields = new JTextField[labels.length];
-
-        for (int i = 0; i < labels.length; i++) {
-            JLabel label = new JLabel(labels[i]);
-            label.setBounds(50, 30 + i * 40, labelWidth, 30);
-            label.setFont(labelFont);
-            accountInfoPanel.add(label);
-
-            JTextField field = new JTextField();
-            field.setBounds(250, 30 + i * 40, fieldWidth, 30);
-            field.setFont(fieldFont);
-            field.setEditable(false);
-            accountInfoFields[i] = field;
-            accountInfoPanel.add(field);
-        }
-
-        exitButton = new JButton("Exit");
-        exitButton.setBounds(1050, 690, 100, 30);
-        exitButton.setFont(new Font("Arial", Font.BOLD, 14));
-        exitButton.setActionCommand("ExitToHomeFromAccountInfo");
-        exitButton.addActionListener(this);
-        accountInfoPanel.add(exitButton);
-
-        add(accountInfoPanel, "AccountInfo");
+    	dispose();
+    	new AccountInfo();   
     }
 
     private void loadUserInfo() {
@@ -347,7 +310,8 @@ public class HomePanel extends JFrame implements ActionListener {
 
         switch (actionCommand) {
             case "AccountInfo":
-                cl.show(getContentPane(), "AccountInfo");
+            	cl.show(getContentPane(), "AccountInfo");
+                createAccountInfoPanel();
                 
                 break;
             case "Deposit":
