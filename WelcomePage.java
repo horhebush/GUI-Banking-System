@@ -94,7 +94,7 @@ public class WelcomePage extends JFrame {
                     loginFrame.setVisible(true); // Display the login frame
                 } else if (text.equals("Sign Up")) {
                 	setVisible(false);
-                    new SignUpGUI(player);
+                    new SignUp(player);
                 }
             }
         });
