@@ -66,6 +66,7 @@ public class AccountInfo {
         contactNumberField = createTextField(260, 510, fieldWidth, 30, fieldFont);
         initialDepositField = createTextField(260, 550, fieldWidth, 30, fieldFont);
         accNumberField = createTextField(260, 590, fieldWidth, 30, fieldFont);
+	accNumberField.setText("20240001");
 
         JLabel userNameLabel = createLabel("User Name:", 50, 30, labelWidth, 30, labelFont);
         JLabel passWordLabel = createLabel("Password:", 50, 70, labelWidth, 30, labelFont);
