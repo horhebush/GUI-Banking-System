@@ -237,8 +237,22 @@ public class AccountInfo {
                 "Initial Deposit: " + initialDepositField.getText() + "\n" +
                 "Account Number: " + accNumberField.getText();
     }
+    
+  
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new AccountInfo());
     }
+   public class intialDept {
+	   
+	  public double intdept = Double.parseDouble(initialDepositField.getText());
+	  public double bal = intdept;
+    	
+    }
+   public class pinCode {
+	   
+		  public String pin = pinCodeField.getText();
+		 
+	    	
+	    }
 }
