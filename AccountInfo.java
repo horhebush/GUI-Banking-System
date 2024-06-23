@@ -240,9 +240,7 @@ public class AccountInfo {
     
   
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new AccountInfo());
-    }
+    
    public class intialDept {
 	   
 	  public double intdept = Double.parseDouble(initialDepositField.getText());
