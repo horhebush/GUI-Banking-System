@@ -108,7 +108,7 @@ public class LogIn extends JFrame {
                     if (username.equals(storedUsername) && password.equals(storedPassword)) {
                         JOptionPane.showMessageDialog(null, "Logged In Successfully!", "Notice", JOptionPane.INFORMATION_MESSAGE);
                         loggedIn = true;
-                        contentPane.setVisible(false);
+                        setVisible(false);
                         JFrame HomePanel = new HomePanel(	);
                         HomePanel.setVisible(true);
                         break;  // Exit loop on successful login
