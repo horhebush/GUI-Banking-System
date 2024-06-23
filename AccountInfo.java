@@ -267,4 +267,11 @@ public class AccountInfo {
 		 
 	    	
 	    }
+
+   public class firstName {
+	   
+		  public String name = firstNameField.getText();
+		 
+	    	
+	    }
 }
