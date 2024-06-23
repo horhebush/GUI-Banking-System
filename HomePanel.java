@@ -1,6 +1,7 @@
 package Java;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,13 +24,20 @@ public class HomePanel extends JFrame implements ActionListener {
     private String username, pin;
 
 	public void parameters(String username, double balance, String accountNumber, String pin) {
-		balance = 1000;
+		AccountInfo accountInfoInstance = new AccountInfo(); // Create an instance of AccountInfo
+	    AccountInfo.intialDept B = accountInfoInstance.new intialDept(); // Instantiate intialDept
+
+	    balance = B.bal; // Assuming bal is a field in intialDept
+
     	this.username = username;
         this.balance = balance;
         if (accountNumber != null && !accountNumber.isEmpty()) {
             AccountNumber = Long.parseLong(accountNumber);
         }
-        pin = "123456";
+        AccountInfo accountInfoInstance1 = new AccountInfo(); // Create an instance of AccountInfo
+	    AccountInfo.pinCode  P = accountInfoInstance1.new pinCode (); // Instantiate intialDept
+
+	    pin = P.pin;
         this.pin = pin;
         initializeUI();
         loadUserInfo();
@@ -113,7 +121,7 @@ public class HomePanel extends JFrame implements ActionListener {
 
         createDepositPanel();
         createWithdrawPanel();
-
+        createAccountInfoPanel();
 
         setVisible(true);
         setResizable(false);
@@ -206,8 +214,46 @@ public class HomePanel extends JFrame implements ActionListener {
     }
 
     private void createAccountInfoPanel() {
-    	dispose();
-    	new AccountInfo();   
+    	
+    	accountInfoPanel = new JPanel();
+        accountInfoPanel.setLayout(null);
+        accountInfoPanel.setBounds(50, 0, 1250, 750);
+
+        int labelWidth = 200;
+        int fieldWidth = 600;
+        Font labelFont = new Font("Arial", Font.BOLD, 14);
+        Font fieldFont = new Font("Arial", Font.PLAIN, 14);
+
+        String[] labels = {
+                "User Name:", "Password:", "Pin:", "First Name:", "Middle Name:", "Last Name:",
+                "Birth Date:", "Gender:", "Address:", "Father's Name:", "Mother's Name:",
+                "Contact Email:", "Contact Number:", "Initial Deposit:", "Account Number:"
+        };
+
+        accountInfoFields = new JTextField[labels.length];
+
+        for (int i = 0; i < labels.length; i++) {
+            JLabel label = new JLabel(labels[i]);
+            label.setBounds(50, 30 + i * 40, labelWidth, 30);
+            label.setFont(labelFont);
+            accountInfoPanel.add(label);
+
+            JTextField field = new JTextField();
+            field.setBounds(250, 30 + i * 40, fieldWidth, 30);
+            field.setFont(fieldFont);
+            field.setEditable(false);
+            accountInfoFields[i] = field;
+            accountInfoPanel.add(field);
+        }
+
+        exitButton = new JButton("Exit");
+        exitButton.setBounds(1050, 690, 100, 30);
+        exitButton.setFont(new Font("Arial", Font.BOLD, 14));
+        exitButton.setActionCommand("ExitToHomeFromAccountInfo");
+        exitButton.addActionListener(this);
+        accountInfoPanel.add(exitButton);
+
+        add(accountInfoPanel, "AccountInfo");
     }
 
     private void loadUserInfo() {
@@ -302,7 +348,7 @@ public class HomePanel extends JFrame implements ActionListener {
         switch (actionCommand) {
             case "AccountInfo":
                 cl.show(getContentPane(), "AccountInfo");
-                createAccountInfoPanel();
+                
                 break;
             case "Deposit":
                 cl.show(getContentPane(), "Deposit");
