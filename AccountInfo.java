@@ -2,6 +2,8 @@ package Java;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader; 
@@ -81,9 +83,16 @@ public class AccountInfo {
         JLabel initialDepositLabel = createLabel("Initial Deposit:", 50, 550, labelWidth, 30, labelFont);
         JLabel accNumberLabel = createLabel("Account Number:", 50, 590, labelWidth, 30, labelFont);
 
+        
         JButton exitButton = new JButton("Exit");
         exitButton.setBounds(1150, 700, 100, 30);
-        exitButton.addActionListener(e -> frame.dispose());
+        exitButton.addActionListener(new ActionListener() { 
+        	public void actionPerformed(ActionEvent e) {
+        	AccountInfo.setVisible(false);
+        	JFrame HomePanel = new HomePanel();
+        	HomePanel.setVisible(true);
+        }
+        });
 
         panel.add(exitButton);
         panel.add(userNameLabel);
@@ -121,7 +130,12 @@ public class AccountInfo {
         frame.setVisible(true);
     }
 
-    private JLabel createLabel(String text, int x, int y, int width, int height, Font font) {
+    protected static void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private JLabel createLabel(String text, int x, int y, int width, int height, Font font) {
         JLabel label = new JLabel(text);
         label.setBounds(x, y, width, height);
         label.setFont(font);
