@@ -2,6 +2,10 @@ package Java;
 
 import javax.swing.*;
 
+import Java.AccountInfo.firstName;
+import Java.AccountInfo.intialDept;
+import Java.AccountInfo.pinCode;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,37 +14,35 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class HomePanel extends JFrame implements ActionListener {
     private JPanel homePanel, depositPanel, withdrawPanel, accountInfoPanel;
     private JLabel balanceLabel, accountNumberLabel, balanceValueLabel, depositBalanceLabel, withdrawBalanceLabel;
     private JButton accountInfoButton, depositButton, withdrawalButton, logoutButton, depositActionButton, withdrawActionButton, exitButton;
     private JTextField depositTextField, withdrawTextField;
     private JTextField[] accountInfoFields;
-    private JDialog PinDialog;
-    private JTextField pinField;
     private double balance;
-    private double updatedBalance;
     private static long AccountNumber = 2024100000;
     private String username, pin; 
+    AccountInfo accountInfoInstance = new AccountInfo(); 
 
 	public void parameters(String username, double balance, String accountNumber, String pin) {
-		AccountInfo accountInfoInstance = new AccountInfo(); // Create an instance of AccountInfo
-	    AccountInfo.intialDept B = accountInfoInstance.new intialDept(); // Instantiate intialDept
-
-	    balance = B.bal; // Assuming bal is a field in intialDept
-
-    	this.username = username;
+	
+		intialDept B = accountInfoInstance.new intialDept(); 
+		firstName N = accountInfoInstance.new firstName();
+	    balance = B.bal; 
+    	this.username = N.name;
         this.balance = balance;
         if (accountNumber != null && !accountNumber.isEmpty()) {
             AccountNumber = Long.parseLong(accountNumber);
         }
-        AccountInfo accountInfoInstance1 = new AccountInfo(); // Create an instance of AccountInfo
-	    AccountInfo.pinCode  P = accountInfoInstance1.new pinCode (); // Instantiate intialDept
+      
+        pinCode  P = accountInfoInstance.new pinCode (); 
 
-	    pin = P.pin;
+        pin = P.pin;
         this.pin = pin;
         initializeUI();
-        loadUserInfo();
+   //     loadUserInfo();
     }
 
     public HomePanel() {
@@ -215,24 +217,10 @@ public class HomePanel extends JFrame implements ActionListener {
     }
 
     private void createAccountInfoPanel() {
-    	dispose();
-    	new AccountInfo();   
+    	
+    	new AccountInfo();
     }
-
-    private void loadUserInfo() {
-        File file = new File("C:\\Users\\Jamaine\\eclipse-workspace\\IntermediateProg\\user_details.txt");
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            int index = 0;
-            while ((line = br.readLine()) != null && index < accountInfoFields.length) {
-                accountInfoFields[index].setText(line);
-                index++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
+ 
     private void createPinDialog(Object source) {
         JDialog pinDialog = new JDialog(this, "Enter PIN", true);
         pinDialog.setSize(300, 150);
@@ -311,8 +299,7 @@ public class HomePanel extends JFrame implements ActionListener {
         switch (actionCommand) {
             case "AccountInfo":
             	cl.show(getContentPane(), "AccountInfo");
-                createAccountInfoPanel();
-                
+            	createAccountInfoPanel();
                 break;
             case "Deposit":
                 cl.show(getContentPane(), "Deposit");
