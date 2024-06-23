@@ -71,7 +71,7 @@ public class LogIn extends JFrame {
 
         JLabel lblNewLabel_3 = new JLabel("Login System");
         lblNewLabel_3.setFont(new Font("Arial Black", Font.BOLD, 27));
-        lblNewLabel_3.setBounds(530, 55, 211, 32);
+        lblNewLabel_3.setBounds(530, 55, 300, 32);
         contentPane.add(lblNewLabel_3);
 
         JButton btnCancel = new JButton("Cancel");
