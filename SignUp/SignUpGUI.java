@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 // This class provides the graphical user interface for user sign-up.
-public class SignUpGUI implements ActionListener {
+public class SignUp implements ActionListener {
 
     ImageIcon logo;
     JFrame window;
@@ -32,7 +32,7 @@ public class SignUpGUI implements ActionListener {
     JButton submitButtn, cancelButtn, muteButton;
     JComboBox<String> dayComboBox, monthComboBox, yearComboBox, genderDropdown;
 
-    public SignUpGUI(MusicPlayer player) {
+    public SignUp(MusicPlayer player) {
         this.player = player; // Initialize the player instance passed from GUI.java
         loadFont();
         initializeWindow();
@@ -49,7 +49,7 @@ public class SignUpGUI implements ActionListener {
 
     private void loadFont() {
         try {
-            InputStream is = getClass().getResourceAsStream("Montserrat-VariableFont_wght.ttf");
+            InputStream is = getClass().getResourceAsStream("Orbitron-VariableFont_wght.ttf");
             montserratFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(12F);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(montserratFont);
@@ -142,18 +142,18 @@ public class SignUpGUI implements ActionListener {
         panelS.add(birthDate);
 
         dayComboBox = new JComboBox<>(generateDays());
-        dayComboBox.setBounds(170, 260, 60, 30);
+        dayComboBox.setBounds(170, 260, 70, 30);
         dayComboBox.setFont(montserratFont);
         panelS.add(dayComboBox);
 
         monthComboBox = new JComboBox<>(new String[]{"Jan", "Feb", "Mar", "Apr", 
         "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"});
-        monthComboBox.setBounds(240, 260, 80, 30);
+        monthComboBox.setBounds(240, 260, 90, 30);
         monthComboBox.setFont(montserratFont);
         panelS.add(monthComboBox);
 
         yearComboBox = new JComboBox<>(generateYears(1920, 2023));
-        yearComboBox.setBounds(330, 260, 80, 30);
+        yearComboBox.setBounds(330, 260, 90, 30);
         yearComboBox.setFont(montserratFont);
         panelS.add(yearComboBox);
 
