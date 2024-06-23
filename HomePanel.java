@@ -1,4 +1,5 @@
 package Java;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,6 +38,7 @@ public class HomePanel extends JFrame implements ActionListener {
     private void initializeUI() {
         setTitle("Federal Reserve Bank of the World");
         setSize(1350, 800);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new CardLayout());
 
