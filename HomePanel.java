@@ -23,15 +23,16 @@ public class HomePanel extends JFrame implements ActionListener {
     private JTextField[] accountInfoFields;
     private double balance;
     private static long AccountNumber = 2024100000;
-    private String username, pin; 
+    private String name, pin; 
     AccountInfo accountInfoInstance = new AccountInfo(); 
 
-	public void parameters(String username, double balance, String accountNumber, String pin) {
+	public void parameters(String name, double balance, String accountNumber, String pin) {
 	
 		intialDept B = accountInfoInstance.new intialDept(); 
 		firstName N = accountInfoInstance.new firstName();
 	    balance = B.bal; 
-    	this.username = N.name;
+	    name = N.name;
+    	this.name = name;
         this.balance = balance;
         if (accountNumber != null && !accountNumber.isEmpty()) {
             AccountNumber = Long.parseLong(accountNumber);
@@ -301,7 +302,7 @@ public class HomePanel extends JFrame implements ActionListener {
             	cl.show(getContentPane(), "AccountInfo");
             	createAccountInfoPanel();
                 break;
-            case "Deposit":
+            case "Deposit": 
                 cl.show(getContentPane(), "Deposit");
                 break;
             case "Withdraw":
